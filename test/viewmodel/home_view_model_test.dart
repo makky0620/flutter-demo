@@ -1,3 +1,4 @@
+import 'package:flutter_template/infrastructure/model/task_entity.dart';
 import 'package:flutter_template/infrastructure/repository/task_repository.dart';
 import 'package:flutter_template/model/task.dart';
 import 'package:flutter_template/viewmodel/home_view_model.dart';
@@ -18,13 +19,14 @@ void main() {
 
   group('Fetch all', () {
     test('should set tasks to state', () async {
-      const task = Task(title: 'title', content: 'content');
+      var task = TaskEntity.of('title', 'content');
       when(taskRepository.fetchAll()).thenAnswer((_) => Future.value([task]));
 
       await viewModel.load();
 
       verify(taskRepository.fetchAll()).called(1);
-      expect(viewModel.debugState.value!.tasks, [task]);
+      expect(viewModel.debugState.value!.tasks,
+          [const Task(title: 'title', content: 'content')]);
     });
 
     test('should set error to state when repository throws exception',

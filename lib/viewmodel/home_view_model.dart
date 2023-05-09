@@ -1,5 +1,7 @@
+import 'package:flutter_template/infrastructure/model/task_entity.dart';
 import 'package:flutter_template/infrastructure/repository/task_db_repository.dart';
 import 'package:flutter_template/infrastructure/repository/task_repository.dart';
+import 'package:flutter_template/model/task.dart';
 import 'package:flutter_template/viewmodel/home_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -14,10 +16,14 @@ class HomeViewModel extends StateNotifier<AsyncValue<HomeState>> {
 
   Future<void> load() async {
     try {
-      final tasks = await _taskRepository.fetchAll();
-      state = AsyncValue.data(HomeState(tasks: tasks));
+      List<TaskEntity> tasks = await _taskRepository.fetchAll();
+      state = AsyncValue.data(HomeState(tasks: _toTasks(tasks)));
     } on Exception catch (err, stack) {
       state = AsyncValue.error(err, stack);
     }
+  }
+
+  List<Task> _toTasks(List<TaskEntity> tasks) {
+    return tasks.map((e) => Task(title: e.title, content: e.content)).toList();
   }
 }

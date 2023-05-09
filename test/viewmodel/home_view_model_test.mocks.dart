@@ -5,9 +5,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
+import 'package:flutter_template/infrastructure/model/task_entity.dart' as _i4;
 import 'package:flutter_template/infrastructure/repository/task_repository.dart'
     as _i2;
-import 'package:flutter_template/model/task.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -30,11 +30,20 @@ class MockTaskRepository extends _i1.Mock implements _i2.TaskRepository {
   }
 
   @override
-  _i3.Future<List<_i4.Task>> fetchAll() => (super.noSuchMethod(
+  _i3.Future<List<_i4.TaskEntity>> fetchAll() => (super.noSuchMethod(
         Invocation.method(
           #fetchAll,
           [],
         ),
-        returnValue: _i3.Future<List<_i4.Task>>.value(<_i4.Task>[]),
-      ) as _i3.Future<List<_i4.Task>>);
+        returnValue: _i3.Future<List<_i4.TaskEntity>>.value(<_i4.TaskEntity>[]),
+      ) as _i3.Future<List<_i4.TaskEntity>>);
+  @override
+  _i3.Future<void> save(_i4.TaskEntity? task) => (super.noSuchMethod(
+        Invocation.method(
+          #save,
+          [task],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
 }
