@@ -13,11 +13,11 @@ class TaskDBRepository implements TaskRepository {
 
   @override
   Future<List<TaskEntity>> fetchAll() async {
-    return [];
+    return box.values.toList();
   }
 
   @override
   Future<void> save(TaskEntity task) async {
-    // TODO
+    await box.put(task.id, task);
   }
 }
