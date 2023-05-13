@@ -41,7 +41,7 @@ class TaskItem extends HookWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Checkbox(value: true, onChanged: onCheck),
+                    Checkbox(value: task.isCompleted, onChanged: onCheck),
                     Flexible(
                         child: Column(
                       children: [
@@ -52,9 +52,10 @@ class TaskItem extends HookWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             child: Text('Task: ${task.title}',
-                                style: const TextStyle(
-                                    decoration: null) // TODO isCompletedの時
-                                ),
+                                style: TextStyle(
+                                    decoration: task.isCompleted
+                                        ? TextDecoration.lineThrough
+                                        : null)),
                           ),
                         ),
                         Align(

@@ -29,9 +29,15 @@ class HomePage extends HookConsumerWidget {
                   return TaskItem(
                       task: task,
                       onSlide: (direction) {
-                        viewModel.deleteTask(task.id);
+                        viewModel
+                            .deleteTask(task.id)
+                            .then((_) => viewModel.load());
                       },
-                      onCheck: (value) {});
+                      onCheck: (value) {
+                        viewModel
+                            .switchStatus(task, value)
+                            .then((_) => viewModel.load());
+                      });
                 });
           },
           error: (e, msg) => const Text('Error'),
@@ -44,9 +50,7 @@ class HomePage extends HookConsumerWidget {
         onPressed: () {
           Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const TaskEditPage()))
-              .then((value) {
-            viewModel.load();
-          });
+              .then((value) => viewModel.load());
         },
       ),
     );

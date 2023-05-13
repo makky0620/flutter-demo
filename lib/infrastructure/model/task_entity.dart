@@ -13,5 +13,12 @@ class TaskEntity extends HiveObject {
   @HiveField(2)
   String content;
 
-  TaskEntity({required this.id, required this.title, required this.content});
+  @HiveField(3)
+  bool isCompleted;
+
+  TaskEntity(
+      {required this.id,
+      required this.title,
+      required this.content,
+      required this.isCompleted});
 }

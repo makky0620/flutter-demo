@@ -13,8 +13,11 @@ class TaskEditViewModel extends StateNotifier<AsyncValue<void>> {
   TaskEditViewModel(this._taskRepository) : super(const AsyncValue.loading());
 
   Future<void> add(Task task) async {
-    var entity =
-        TaskEntity(id: task.id, title: task.title, content: task.content);
+    var entity = TaskEntity(
+        id: task.id,
+        title: task.title,
+        content: task.content,
+        isCompleted: task.isCompleted);
     await _taskRepository.save(entity);
   }
 }

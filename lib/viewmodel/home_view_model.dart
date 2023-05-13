@@ -31,9 +31,26 @@ class HomeViewModel extends StateNotifier<AsyncValue<HomeState>> {
     }
   }
 
+  Future<void> switchStatus(Task task, bool value) async {
+    try {
+      var newTask = TaskEntity(
+          id: task.id,
+          title: task.title,
+          content: task.content,
+          isCompleted: value);
+      await _taskRepository.update(newTask);
+    } on Exception catch (err, stack) {
+      state = AsyncValue.error(err, stack);
+    }
+  }
+
   List<Task> _toTasks(List<TaskEntity> tasks) {
     return tasks
-        .map((e) => Task(id: e.id, title: e.title, content: e.content))
+        .map((e) => Task(
+            id: e.id,
+            title: e.title,
+            content: e.content,
+            isCompleted: e.isCompleted))
         .toList();
   }
 }
