@@ -17,7 +17,7 @@ class TaskEditPage extends HookConsumerWidget {
           child: const Icon(Icons.save),
           onPressed: () {
             viewModel
-                .add(const Task(title: 'title', content: 'content'))
+                .add(Task.of(title: 'title', content: 'content'))
                 .then((value) => Navigator.of(context).pop());
           }),
     );

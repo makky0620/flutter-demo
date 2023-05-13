@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Task {
+  String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
 
@@ -28,7 +29,7 @@ abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res, Task>;
   @useResult
-  $Res call({String title, String content});
+  $Res call({String id, String title, String content});
 }
 
 /// @nodoc
@@ -44,10 +45,15 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? title = null,
     Object? content = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -66,7 +72,7 @@ abstract class _$$_TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
       __$$_TaskCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String content});
+  $Res call({String id, String title, String content});
 }
 
 /// @nodoc
@@ -78,10 +84,15 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? title = null,
     Object? content = null,
   }) {
     return _then(_$_Task(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -97,8 +108,10 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
 /// @nodoc
 
 class _$_Task implements _Task {
-  const _$_Task({this.title = '', this.content = ''});
+  const _$_Task({required this.id, this.title = '', this.content = ''});
 
+  @override
+  final String id;
   @override
   @JsonKey()
   final String title;
@@ -108,7 +121,7 @@ class _$_Task implements _Task {
 
   @override
   String toString() {
-    return 'Task(title: $title, content: $content)';
+    return 'Task(id: $id, title: $title, content: $content)';
   }
 
   @override
@@ -116,12 +129,13 @@ class _$_Task implements _Task {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Task &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, content);
+  int get hashCode => Object.hash(runtimeType, id, title, content);
 
   @JsonKey(ignore: true)
   @override
@@ -131,8 +145,13 @@ class _$_Task implements _Task {
 }
 
 abstract class _Task implements Task {
-  const factory _Task({final String title, final String content}) = _$_Task;
+  const factory _Task(
+      {required final String id,
+      final String title,
+      final String content}) = _$_Task;
 
+  @override
+  String get id;
   @override
   String get title;
   @override

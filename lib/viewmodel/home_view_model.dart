@@ -23,7 +23,7 @@ class HomeViewModel extends StateNotifier<AsyncValue<HomeState>> {
     }
   }
 
-  Future<void> deleteTask(int taskId) async {
+  Future<void> deleteTask(String taskId) async {
     try {
       await _taskRepository.delete(taskId);
     } on Exception catch (err, stack) {
@@ -32,7 +32,8 @@ class HomeViewModel extends StateNotifier<AsyncValue<HomeState>> {
   }
 
   List<Task> _toTasks(List<TaskEntity> tasks) {
-    return tasks.map((e) => Task(title: e.title, content: e.content)).toList();
+    return tasks
+        .map((e) => Task(id: e.id, title: e.title, content: e.content))
+        .toList();
   }
-
 }

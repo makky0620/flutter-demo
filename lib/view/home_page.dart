@@ -25,10 +25,12 @@ class HomePage extends HookConsumerWidget {
             return ListView.builder(
                 itemCount: data.tasks.length,
                 itemBuilder: (context, index) {
+                  var task = data.tasks[index];
                   return TaskItem(
-                      task: data.tasks[index],
-                      index: index,
-                      onSlide: (direction) {},
+                      task: task,
+                      onSlide: (direction) {
+                        viewModel.deleteTask(task.id);
+                      },
                       onCheck: (value) {});
                 });
           },

@@ -4,14 +4,12 @@ import 'package:flutter_template/model/task.dart';
 
 class TaskItem extends HookWidget {
   final Task task;
-  final int index;
   final Function(DismissDirection) onSlide;
   final ValueChanged onCheck;
 
   const TaskItem(
       {Key? key,
       required this.task,
-      required this.index,
       required this.onSlide,
       required this.onCheck})
       : super(key: key);
@@ -21,7 +19,7 @@ class TaskItem extends HookWidget {
     return Container(
       margin: const EdgeInsets.all(4),
       child: Dismissible(
-        key: Key(task.title),
+        key: Key(task.id),
         onDismissed: onSlide,
         direction: DismissDirection.startToEnd,
         background: Container(

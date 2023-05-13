@@ -1,5 +1,4 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:uuid/uuid.dart';
 
 part 'task_entity.g.dart';
 
@@ -15,7 +14,4 @@ class TaskEntity extends HiveObject {
   String content;
 
   TaskEntity({required this.id, required this.title, required this.content});
-
-  factory TaskEntity.of(String? title, String? content) => TaskEntity(
-      id: const Uuid().v4(), title: title ?? '', content: content ?? '');
 }

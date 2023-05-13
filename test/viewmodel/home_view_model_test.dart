@@ -19,14 +19,14 @@ void main() {
 
   group('Fetch all', () {
     test('should set tasks to state', () async {
-      var task = TaskEntity.of('title', 'content');
+      var task = TaskEntity(id: 'task', title: 'title', content: 'content');
       when(taskRepository.fetchAll()).thenAnswer((_) => Future.value([task]));
 
       await viewModel.load();
 
       verify(taskRepository.fetchAll()).called(1);
       expect(viewModel.debugState.value!.tasks,
-          [const Task(title: 'title', content: 'content')]);
+          [const Task(id: 'task', title: 'title', content: 'content')]);
     });
 
     test('should set error to state when repository throws exception',
@@ -41,15 +41,13 @@ void main() {
     });
   });
 
-
   group('Delete task', () {
     test('should call delete of repository', () async {
-      var taskId = 1;
+      var taskId = 'task';
 
       await viewModel.deleteTask(taskId);
 
       verify(taskRepository.delete(taskId)).called(1);
     });
-
   });
 }

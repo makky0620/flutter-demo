@@ -22,7 +22,7 @@ class TaskDBRepository implements TaskRepository {
   }
 
   @override
-  Future<void> delete(int id) async {
+  Future<void> delete(String id) async {
+    await box.delete(id);
   }
-
 }
