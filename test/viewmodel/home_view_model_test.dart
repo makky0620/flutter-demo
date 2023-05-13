@@ -19,14 +19,22 @@ void main() {
 
   group('Fetch all', () {
     test('should set tasks to state', () async {
-      var task = TaskEntity(id: 'task', title: 'title', content: 'content');
+      var task = TaskEntity(id: 'task', 
+                            title: 'title',
+			    content: 'content',
+			    isCompleted: false,
+			    createdAt: DateTime(2023, 5, 14, 10));
       when(taskRepository.fetchAll()).thenAnswer((_) => Future.value([task]));
 
       await viewModel.load();
 
       verify(taskRepository.fetchAll()).called(1);
       expect(viewModel.debugState.value!.tasks,
-          [const Task(id: 'task', title: 'title', content: 'content')]);
+          [Task(id: 'task', 
+	              title: 'title', 
+		      content: 'content',
+		      isCompleted: false,
+		      createdAt: DateTime(2023, 5, 14, 10))]);
     });
 
     test('should set error to state when repository throws exception',
