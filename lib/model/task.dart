@@ -9,16 +9,19 @@ class Task with _$Task {
       {required String id,
       required String title,
       required String content,
-      required bool isCompleted}) = _Task;
+      required bool isCompleted,
+      required DateTime createdAt}) = _Task;
 
   factory Task.of(
       {required String title,
       required String content,
-      required bool isCompleted}) {
+      required bool isCompleted,
+      required DateTime createdAt}) {
     return Task(
         id: const Uuid().v4(),
         title: title,
         content: content,
-        isCompleted: isCompleted);
+        isCompleted: isCompleted,
+        createdAt: createdAt);
   }
 }

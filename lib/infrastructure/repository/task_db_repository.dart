@@ -13,7 +13,8 @@ class TaskDBRepository implements TaskRepository {
 
   @override
   Future<List<TaskEntity>> fetchAll() async {
-    return box.values.toList();
+    return box.values.toList()
+      ..sort((a, b) => a.createdAt.compareTo(b.createdAt));
   }
 
   @override

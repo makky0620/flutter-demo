@@ -49,7 +49,8 @@ class TaskEditPage extends HookConsumerWidget {
                 .add(Task.of(
                     title: title.value,
                     content: content.value,
-                    isCompleted: false))
+                    isCompleted: false,
+                    createdAt: DateTime.now()))
                 .then((value) => Navigator.of(context).pop());
           }),
     );

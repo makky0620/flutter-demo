@@ -17,7 +17,8 @@ class TaskEditViewModel extends StateNotifier<AsyncValue<void>> {
         id: task.id,
         title: task.title,
         content: task.content,
-        isCompleted: task.isCompleted);
+        isCompleted: task.isCompleted,
+        createdAt: task.createdAt);
     await _taskRepository.save(entity);
   }
 }

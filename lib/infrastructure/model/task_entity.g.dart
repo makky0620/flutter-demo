@@ -21,13 +21,14 @@ class TaskEntityAdapter extends TypeAdapter<TaskEntity> {
       title: fields[1] as String,
       content: fields[2] as String,
       isCompleted: fields[3] as bool,
+      createdAt: fields[4] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskEntity obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class TaskEntityAdapter extends TypeAdapter<TaskEntity> {
       ..writeByte(2)
       ..write(obj.content)
       ..writeByte(3)
-      ..write(obj.isCompleted);
+      ..write(obj.isCompleted)
+      ..writeByte(4)
+      ..write(obj.createdAt);
   }
 
   @override

@@ -37,7 +37,8 @@ class HomeViewModel extends StateNotifier<AsyncValue<HomeState>> {
           id: task.id,
           title: task.title,
           content: task.content,
-          isCompleted: value);
+          isCompleted: value,
+          createdAt: task.createdAt);
       await _taskRepository.update(newTask);
     } on Exception catch (err, stack) {
       state = AsyncValue.error(err, stack);
@@ -50,7 +51,8 @@ class HomeViewModel extends StateNotifier<AsyncValue<HomeState>> {
             id: e.id,
             title: e.title,
             content: e.content,
-            isCompleted: e.isCompleted))
+            isCompleted: e.isCompleted,
+            createdAt: e.createdAt))
         .toList();
   }
 }

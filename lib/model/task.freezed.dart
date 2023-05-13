@@ -20,6 +20,7 @@ mixin _$Task {
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   bool get isCompleted => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
@@ -30,7 +31,12 @@ abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res, Task>;
   @useResult
-  $Res call({String id, String title, String content, bool isCompleted});
+  $Res call(
+      {String id,
+      String title,
+      String content,
+      bool isCompleted,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -50,6 +56,7 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
     Object? title = null,
     Object? content = null,
     Object? isCompleted = null,
+    Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -68,6 +75,10 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
               as bool,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -78,7 +89,12 @@ abstract class _$$_TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
       __$$_TaskCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String title, String content, bool isCompleted});
+  $Res call(
+      {String id,
+      String title,
+      String content,
+      bool isCompleted,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -94,6 +110,7 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
     Object? title = null,
     Object? content = null,
     Object? isCompleted = null,
+    Object? createdAt = null,
   }) {
     return _then(_$_Task(
       id: null == id
@@ -112,6 +129,10 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
               as bool,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -123,7 +144,8 @@ class _$_Task implements _Task {
       {required this.id,
       required this.title,
       required this.content,
-      required this.isCompleted});
+      required this.isCompleted,
+      required this.createdAt});
 
   @override
   final String id;
@@ -133,10 +155,12 @@ class _$_Task implements _Task {
   final String content;
   @override
   final bool isCompleted;
+  @override
+  final DateTime createdAt;
 
   @override
   String toString() {
-    return 'Task(id: $id, title: $title, content: $content, isCompleted: $isCompleted)';
+    return 'Task(id: $id, title: $title, content: $content, isCompleted: $isCompleted, createdAt: $createdAt)';
   }
 
   @override
@@ -148,11 +172,14 @@ class _$_Task implements _Task {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.isCompleted, isCompleted) ||
-                other.isCompleted == isCompleted));
+                other.isCompleted == isCompleted) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, content, isCompleted);
+  int get hashCode =>
+      Object.hash(runtimeType, id, title, content, isCompleted, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -166,7 +193,8 @@ abstract class _Task implements Task {
       {required final String id,
       required final String title,
       required final String content,
-      required final bool isCompleted}) = _$_Task;
+      required final bool isCompleted,
+      required final DateTime createdAt}) = _$_Task;
 
   @override
   String get id;
@@ -176,6 +204,8 @@ abstract class _Task implements Task {
   String get content;
   @override
   bool get isCompleted;
+  @override
+  DateTime get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$_TaskCopyWith<_$_Task> get copyWith => throw _privateConstructorUsedError;

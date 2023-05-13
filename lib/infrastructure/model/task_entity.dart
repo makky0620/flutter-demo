@@ -16,9 +16,13 @@ class TaskEntity extends HiveObject {
   @HiveField(3)
   bool isCompleted;
 
+  @HiveField(4)
+  DateTime createdAt;
+
   TaskEntity(
       {required this.id,
       required this.title,
       required this.content,
-      required this.isCompleted});
+      required this.isCompleted,
+      required this.createdAt});
 }

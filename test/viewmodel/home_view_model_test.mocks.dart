@@ -55,4 +55,13 @@ class MockTaskRepository extends _i1.Mock implements _i2.TaskRepository {
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
+  @override
+  _i3.Future<void> update(_i4.TaskEntity? task) => (super.noSuchMethod(
+        Invocation.method(
+          #update,
+          [task],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
 }
