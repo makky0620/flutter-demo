@@ -4,4 +4,6 @@ abstract class TaskRepository {
   Future<List<TaskEntity>> fetchAll();
 
   Future<void> save(TaskEntity task);
+
+  Future<void> delete(int id);
 }

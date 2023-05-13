@@ -40,4 +40,16 @@ void main() {
       expect(viewModel.debugState.error, isException);
     });
   });
+
+
+  group('Delete task', () {
+    test('should call delete of repository', () async {
+      var taskId = 1;
+
+      await viewModel.deleteTask(taskId);
+
+      verify(taskRepository.delete(taskId)).called(1);
+    });
+
+  });
 }

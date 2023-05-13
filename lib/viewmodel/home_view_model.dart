@@ -23,7 +23,16 @@ class HomeViewModel extends StateNotifier<AsyncValue<HomeState>> {
     }
   }
 
+  Future<void> deleteTask(int taskId) async {
+    try {
+      await _taskRepository.delete(taskId);
+    } on Exception catch (err, stack) {
+      state = AsyncValue.error(err, stack);
+    }
+  }
+
   List<Task> _toTasks(List<TaskEntity> tasks) {
     return tasks.map((e) => Task(title: e.title, content: e.content)).toList();
   }
+
 }

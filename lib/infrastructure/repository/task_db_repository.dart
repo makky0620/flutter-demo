@@ -20,4 +20,9 @@ class TaskDBRepository implements TaskRepository {
   Future<void> save(TaskEntity task) async {
     await box.put(task.id, task);
   }
+
+  @override
+  Future<void> delete(int id) async {
+  }
+
 }
