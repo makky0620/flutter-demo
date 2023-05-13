@@ -48,7 +48,7 @@ class TaskItem extends HookWidget {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: DefaultTextStyle(
-                            style: Theme.of(context).textTheme.subtitle1!,
+                            style: Theme.of(context).textTheme.titleMedium!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             child: Text('Task: ${task.title}',
@@ -61,7 +61,7 @@ class TaskItem extends HookWidget {
                           alignment: Alignment.centerLeft,
                           child: DefaultTextStyle(
                               overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.caption!,
+                              style: Theme.of(context).textTheme.bodySmall!,
                               maxLines: 2,
                               child: Text('Description: ${task.content}')),
                         )
