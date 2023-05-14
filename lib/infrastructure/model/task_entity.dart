@@ -25,4 +25,27 @@ class TaskEntity extends HiveObject {
       required this.content,
       required this.isCompleted,
       required this.createdAt});
+
+  @override
+  bool operator ==(other) =>
+      other is TaskEntity &&
+      id == other.id &&
+      title == other.title &&
+      content == other.content &&
+      isCompleted == other.isCompleted &&
+      createdAt == other.createdAt;
+
+  @override
+  int get hashCode => Object.hash(id, content, isCompleted, createdAt);
+
+  @override
+  String toString() {
+    return 'TaskEntity('
+        'id: $id, '
+        'title: $title, '
+        'content: $content, '
+        'isCompleted: $isCompleted, '
+        'createdAt: $createdAt'
+        ')';
+  }
 }

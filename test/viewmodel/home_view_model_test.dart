@@ -17,24 +17,27 @@ void main() {
     viewModel = HomeViewModel(taskRepository);
   });
 
-  group('Fetch all', () {
+  group('Load', () {
     test('should set tasks to state', () async {
-      var task = TaskEntity(id: 'task', 
-                            title: 'title',
-			    content: 'content',
-			    isCompleted: false,
-			    createdAt: DateTime(2023, 5, 14, 10));
+      var task = TaskEntity(
+          id: 'task',
+          title: 'title',
+          content: 'content',
+          isCompleted: false,
+          createdAt: DateTime(2023, 5, 14, 10));
       when(taskRepository.fetchAll()).thenAnswer((_) => Future.value([task]));
 
       await viewModel.load();
 
       verify(taskRepository.fetchAll()).called(1);
-      expect(viewModel.debugState.value!.tasks,
-          [Task(id: 'task', 
-	              title: 'title', 
-		      content: 'content',
-		      isCompleted: false,
-		      createdAt: DateTime(2023, 5, 14, 10))]);
+      expect(viewModel.debugState.value!.tasks, [
+        Task(
+            id: 'task',
+            title: 'title',
+            content: 'content',
+            isCompleted: false,
+            createdAt: DateTime(2023, 5, 14, 10))
+      ]);
     });
 
     test('should set error to state when repository throws exception',
@@ -56,6 +59,60 @@ void main() {
       await viewModel.deleteTask(taskId);
 
       verify(taskRepository.delete(taskId)).called(1);
+    });
+
+    test('should set error to state when repository throws exception',
+        () async {
+      var taskId = 'task';
+      when(taskRepository.delete(taskId))
+          .thenAnswer((_) => Future.error(Exception('error')));
+
+      await viewModel.deleteTask(taskId);
+
+      verify(taskRepository.delete(taskId)).called(1);
+      expect(viewModel.debugState.error, isException);
+    });
+  });
+
+  group('Switch status', () {
+    test('should call with the task changed completed frag', () async {
+      var task = Task.of(
+          title: 'dummy',
+          content: 'dummy',
+          isCompleted: false,
+          createdAt: DateTime(2023, 5, 14, 10));
+
+      await viewModel.switchStatus(task, true);
+
+      var changedTask = TaskEntity(
+          id: task.id,
+          title: task.title,
+          content: task.content,
+          isCompleted: true,
+          createdAt: task.createdAt);
+      verify(taskRepository.update(changedTask)).called(1);
+    });
+
+    test('should set error to state when repository throws exception',
+        () async {
+      var task = Task.of(
+          title: 'dummy',
+          content: 'dummy',
+          isCompleted: false,
+          createdAt: DateTime(1900, 1, 1, 1));
+      var entity = TaskEntity(
+          id: task.id,
+          title: 'dummy',
+          content: 'dummy',
+          isCompleted: true,
+          createdAt: DateTime(1900, 1, 1, 1));
+      when(taskRepository.update(entity))
+          .thenAnswer((_) => Future.error(Exception('error')));
+
+      await viewModel.switchStatus(task, true);
+
+      verify(taskRepository.update(entity)).called(1);
+      expect(viewModel.debugState.error, isException);
     });
   });
 }
