@@ -15,7 +15,7 @@ class HomePage extends HookConsumerWidget {
 
     useEffect(() {
       viewModel.load();
-      return viewModel.dispose;
+      return;
     }, const []);
 
     return Scaffold(
